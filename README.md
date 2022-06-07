@@ -1,10 +1,7 @@
 # 1. WeBASE管理平台
 
-## 1.1 安装WeBASE
 - WeBASE管理平台是一套包含BCOS节点、区块浏览器以及账号密钥和节点管理的综合平台
 - 安装过程见deploy目录下的 《FISCO-WeBASE部署说明.md》
-
-## 1.2 
 
 # 2. 安装BCOS合约编译工具
 

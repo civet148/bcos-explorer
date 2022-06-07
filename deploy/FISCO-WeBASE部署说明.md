@@ -226,7 +226,7 @@ check finished sucessfully.
 check wget...
 check finished sucessfully.
 check dos2unix...
-[sudo] password for impool: 
+[sudo] password for lory: 
 Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
@@ -262,7 +262,7 @@ Defualt nginx config path: /etc/nginx
 ## 8. 网页图形验证码无法加载问题
 
 ```sh
-# 修改webase-sign配置文件在数据库url最后加useSSL=false
+# 修改webase-sign配置文件在数据库url最后加&useSSL=false&allowPublicKeyRetrieval=true
 lory@host:~/webase/webase-deploy$ vi webase-sign/conf/application.yml 
 
 spring:
