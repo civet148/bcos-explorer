@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/civet148/bcos-explorer/config"
+	"github.com/civet148/bcos-explorer/contract/token"
 	"github.com/civet148/bcos-explorer/pkg/bcos"
 	"github.com/civet148/log"
 	"github.com/urfave/cli/v2"
@@ -43,14 +44,6 @@ func main() {
 		Usage:   FullName,
 		Version: Version,
 		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:     CmdFlagNameNodeUrl,
-				Required: true, //节点地址参数必填
-			},
-			&cli.StringFlag{
-				Name:     CmdFlagNameContractAddr,
-				Required: true, //合约地址参数必填
-			},
 		},
 		Commands: subCmds,
 		Action: nil,
@@ -71,7 +64,7 @@ var deployCmd = &cli.Command{
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:     CmdFlagNameNodeUrl,
-			Usage:    "BCOS node url",
+			Usage:    "BCOS node url, eg. http://127.0.0.1:8545",
 			Required: true, //必填：节点URL
 		},
 		&cli.Int64Flag{
@@ -99,14 +92,14 @@ var deployCmd = &cli.Command{
 			return err
 		}
 		defer client.Close()
-
-		//addr, tx, _, err := printer.DeployNftPrinter(client.GetTransactOpts(), client)
-		//if err != nil {
-		//	log.Errorf("deploy error [%s]", err)
-		//	return err
-		//}
-		//log.Infof("contract address: %s", addr.Hex()) // the address should be saved
-		//log.Infof("contract deploy tx hash: %s", tx.Hash().Hex())
+		//部署代币合约并设置发行量为10000000(一千万)
+		addr, tx, _, err := token.DeployToken(client.GetTransactOpts(), client, 10000000)
+		if err != nil {
+			log.Errorf("deploy error [%s]", err)
+			return err
+		}
+		log.Infof("contract address: %s", addr.Hex()) //部署成功后的合约地址
+		log.Infof("contract tx: %s", tx.Hash().Hex()) //部署成功的交易哈希(可通过浏览器查询)
 		return nil
 	},
 }

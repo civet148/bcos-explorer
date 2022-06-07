@@ -13,3 +13,7 @@ invoker:
 # 编译并启动区块浏览器
 run:explorer
 	./bcos-explorer --node-url "http://192.168.20.108:8545"
+
+# 编译并启动合约调用工具部署合约
+deploy:invoker
+	./bcos-invoker deploy --node-url "http://192.168.20.108:8545"
