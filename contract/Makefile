@@ -11,5 +11,5 @@ all: contract
 
 contract:
 	mkdir -p ${GO_DIR} \
-    && abigen --sol ${CONTRACT_DIR}/token.sol --pkg ${GO_PKG} --out ${GO_DIR}/token.go \
+    && /usr/local/bin/abigen --sol ${CONTRACT_DIR}/token.sol --pkg ${GO_PKG} --out ${GO_DIR}/token.go \
     && solc --bin --abi --overwrite -o ${GO_DIR} ${CONTRACT_DIR}/token.sol

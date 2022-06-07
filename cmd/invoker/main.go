@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"github.com/civet148/bcos-explorer/config"
 	"github.com/civet148/bcos-explorer/contract/token"
 	"github.com/civet148/bcos-explorer/pkg/bcos"
+	"github.com/civet148/bcos-explorer/pkg/utils"
 	"github.com/civet148/log"
 	"github.com/urfave/cli/v2"
 	"os"
@@ -93,13 +95,26 @@ var deployCmd = &cli.Command{
 		}
 		defer client.Close()
 		//部署代币合约并设置发行量为10000000(一千万)
-		addr, tx, _, err := token.DeployToken(client.GetTransactOpts(), client, 10000000)
+		addr, tx, token, err := token.DeployToken(client.GetTransactOpts(), client, 10000000)
 		if err != nil {
 			log.Errorf("deploy error [%s]", err)
 			return err
 		}
-		log.Infof("contract address: %s", addr.Hex()) //部署成功后的合约地址
-		log.Infof("contract tx: %s", tx.Hash().Hex()) //部署成功的交易哈希(可通过浏览器查询)
+		fmt.Printf("contract address: %s\n", addr.Hex()) //部署成功后的合约地址
+		fmt.Printf("tx hash: %s\n", tx.Hash().Hex()) //部署成功的交易哈希(可通过浏览器查询)
+
+		//查询合约拥有者地址余额（合约刚刚部署成功的状态下余额应为一千万)
+		var balance uint64
+		owner, _ := utils.EtherAddr(ownerAddress) //将字符串类型的地址转成以太坊地址结构
+
+		//查询类的合约方法不需要签名，因此需要的是CallOpts对象而不是TransactOpts
+		balance, err = token.BalanceOf(client.GetCallOpts(), owner)
+		if err != nil {
+			log.Errorf("call BalanceOf error [%s]", err)
+			return err
+		}
+		//部署合约的账户就是官方账户，当前余额一千万(跟token发行量保持一致)
+		fmt.Printf("owner %s balance %d tokens\n", owner.String(), balance)
 		return nil
 	},
 }

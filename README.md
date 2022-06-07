@@ -17,7 +17,7 @@ $ cd $GOPATH/src && git clone https://github.com/FISCO-BCOS/go-sdk
 - solc是solidity合约编译器
 
 ```shell
-# 下载对应系统的solc版本v0.4.25并拷贝到/usr/loca/bin目录下更名为solc
+# 下载对应操作系统版本solc v0.4.25并拷贝到/usr/loca/bin目录下更名为solc
 $ cd $GOPATH/src/go-sdk/tools && chmod +x *.sh && ./download_solc.sh 0.4.25 && sudo cp solc-0.4.25 /usr/local/bin/solc
 
 Downloading solc 0.4.25 solc-linux.tar.gz from https://github.com/FISCO-BCOS/solidity/releases/download/v0.4.25/solc-linux.tar.gz
@@ -41,7 +41,7 @@ $ cd $GOPATH/src/go-sdk/cmd/abigen
 $ go mod tidy &&  go build -ldflags "-s -w" -o abigen && sudo cp abigen /usr/local/bin
 
 # 查看abigen版本信息
-$ abigen -v
+$ /usr/local/bin/abigen -v
 abigen version 1.10.12-stable
 ```
 
@@ -66,3 +66,17 @@ drwxrwxrwx 1 lory lory  4096 Jun  2 13:39 ../
 
 ```
 
+# 4. 部署合约
+
+```shell
+# 进入cmd/invoker目录编译bcos-invoker程序
+$ cd cmd/invoker && go build -ldflags "-s -w" -o bcos-invoker
+
+# 编译成功后执行如下命令行(假设BCOS节点URL是 http://192.168.20.108:8545) 执行成功返回如下信息：合约地址、交易哈希以及owner账户余额信息
+$ ./bcos-invoker deploy --node-url http://192.168.20.108:8545
+
+contract address: 0xd3D82d2515DF022b60F7Fad5daeD06AB046b42df
+tx hash: 0x67c2ecf858691294c74f0247bedd75c872e9e59cd113ccc34c644555b01df26c
+owner 0x5B0c43004e0a68Eb197c629CE78Da62d65Aa6C03 balance 10000000 tokens
+
+```
