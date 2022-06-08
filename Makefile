@@ -3,12 +3,12 @@ SHELL=/usr/bin/env bash
 # 编译区块浏览器二进制程序
 explorer:
 	rm -rf bcos-explorer
-	go build -ldflags "-s -w" -o bcos-explorer cmd/explorer/main.go
+	go build -ldflags "-s -w" -o bcos-explorer cmd/bcos-explorer/main.go
 
 # 编译区块浏览器二进制程序
 invoker:
 	rm -rf bcos-invoker
-	go build -ldflags "-s -w" -o bcos-invoker cmd/invoker/main.go
+	go build -ldflags "-s -w" -o bcos-invoker cmd/bcos-invoker/main.go
 
 # 编译并启动区块浏览器
 run:explorer

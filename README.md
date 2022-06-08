@@ -2,6 +2,7 @@
 
 - WeBASE管理平台是一套包含BCOS节点、区块浏览器以及账号密钥和节点管理的综合平台
 - 安装过程见deploy目录下的 《FISCO-WeBASE部署说明.md》
+- 后续使用到的用户私钥可以通过WeBASE平台私钥管理菜单创建
 
 # 2. 安装BCOS合约编译工具
 
@@ -66,11 +67,26 @@ drwxrwxrwx 1 lory lory  4096 Jun  2 13:39 ../
 
 ```
 
-# 4. 部署合约
+# 4. 创建账户私钥
 
 ```shell
-# 进入cmd/invoker目录编译bcos-invoker程序
-$ cd cmd/invoker && go build -ldflags "-s -w" -o bcos-invoker
+# 进入cmd/bcos-account目录编译bcos-account程序
+$ cd cmd/bcos-account && go build -ldflags "-s -w" -o bcos-account
+$ ./bcos-account new
+
+address [0x5f9c56B86E94e9302D7074b8E5f1397a798452E5]
+public key [032ca918b9e91ab3476d656ba66aea74a1318f5417f74e63de86ffa0d70e30cd24]
+private key [44af095ec12d675dc338898a15c8cfd8e6d7ea8de608942a590a1b9fe27334dc]
+phrase [road always practice armed know stem crucial wave crouch enact candy earn]
+
+```
+
+
+# 5. 部署合约
+
+```shell
+# 进入cmd/bcos-invoker目录编译bcos-invoker程序
+$ cd cmd/bcos-invoker && go build -ldflags "-s -w" -o bcos-invoker
 
 # 编译成功后执行如下命令行(假设BCOS节点URL是 http://192.168.20.108:8545) 执行成功返回如下信息：合约地址、交易哈希以及owner账户余额信息
 $ ./bcos-invoker deploy --node-url http://192.168.20.108:8545
@@ -81,7 +97,7 @@ owner 0x5B0c43004e0a68Eb197c629CE78Da62d65Aa6C03 balance 10000000 tokens
 
 ```
 
-# 5. 转账(前提：合约部署成功)
+# 6. 转账(前提：合约部署成功)
 
 ```shell
 # 增加--contract-addr 参数指定第4章节部署合约后得到的合约地址进行转账操作

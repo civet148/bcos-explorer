@@ -1,2 +1,6 @@
 /bcos-explorer
 /bcos-invoker
+/bcos-account
+/cmd/bcos-account/bcos-account
+/cmd/bcos-invoker/bcos-invoker
+/cmd/bcos-explorer/bcos-explorer

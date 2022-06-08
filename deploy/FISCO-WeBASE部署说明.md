@@ -304,6 +304,20 @@ spring:
 lory@host:~/webase/webase-deploy$ python3 deploy.py stopAll && python3 deploy.py startAll 
 ```
 
+# 9. 创建私钥
+
+- 登录WeBASE平台，找到私钥管理菜单，点击新增私钥用户
+
+![img_1.png](img_1.png)
+
+- 点击导出私钥，保存为txt文档
+
+![img_4.png](img_4.png)
+
+![img_2.png](img_2.png)
+
+![img_3.png](img_3.png)
+
 # docker部署指南
 
 [一键Docker部署 — WeBASE v1.5.4 文档 (webasedoc.readthedocs.io)](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Install/docker_install.html)
