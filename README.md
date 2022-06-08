@@ -12,7 +12,7 @@ $ cd $GOPATH/src && git clone https://github.com/FISCO-BCOS/go-sdk
 ```
 
 
-## 2.1 下载solc编译器
+## 2.2 下载solc编译器
 
 - solc是solidity合约编译器
 
@@ -31,7 +31,7 @@ solc, the solidity compiler commandline interface
 Version: 0.4.25+commit.46d177ad.mod.Linux.g++
 ```
 
-## 2.2 编译abigen工具
+## 2.3 编译abigen工具
 
 - abigen工具用于将solidity合约代码生成go语言代码
    
@@ -79,4 +79,15 @@ contract address: 0xd3D82d2515DF022b60F7Fad5daeD06AB046b42df
 tx hash: 0x67c2ecf858691294c74f0247bedd75c872e9e59cd113ccc34c644555b01df26c
 owner 0x5B0c43004e0a68Eb197c629CE78Da62d65Aa6C03 balance 10000000 tokens
 
+```
+
+# 5. 转账(前提：合约部署成功)
+
+```shell
+# 增加--contract-addr 参数指定第4章节部署合约后得到的合约地址进行转账操作
+$ ./bcos-invoker transfer --node-url "http://192.168.20.108:8545" --contract-addr 0xd3D82d2515DF022b60F7Fad5daeD06AB046b42df
+
+tx hash [0x59f88e2f8a14e51b6461f936ae06484403b9e1589b92ac7bce17945fb698ba6a]
+owner 0x5B0c43004e0a68Eb197c629CE78Da62d65Aa6C03 balance 9999900 tokens
+receiver 0x5B0c43004e0a68Eb197c629CE78Da62d65Aa6C03 balance 100 tokens
 ```

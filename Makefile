@@ -18,3 +18,7 @@ run:explorer
 deploy:invoker
 	./bcos-invoker deploy --node-url "http://192.168.20.108:8545"
 
+# 编译并启动合约调用工
+transfer:invoker
+	./bcos-invoker transfer --node-url "http://192.168.20.108:8545" --contract-addr 0xd3D82d2515DF022b60F7Fad5daeD06AB046b42df
+
