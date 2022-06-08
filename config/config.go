@@ -2,7 +2,7 @@ package config
 
 type Config struct {
 	NodeUrl      string `json:"node_url" toml:"node_url" cli:"node_url"`                //节点URL
-	Height       string `json:"height" toml:"height" cli:"height"`                      //区块高度
+	Height       int64 `json:"height" toml:"height" cli:"height"`                      //区块高度
 	ChainID      int64  `json:"chain_id" toml:"chain_id" cli:"chain_id"`                //链ID
 	GroupID      int    `json:"group_id" toml:"group_id" cli:"group_id"`                //分组ID
 	Address      string `json:"address" toml:"address" cli:"address"`                   //公钥地址

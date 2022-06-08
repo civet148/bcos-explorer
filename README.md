@@ -123,3 +123,21 @@ tx hash [0x59f88e2f8a14e51b6461f936ae06484403b9e1589b92ac7bce17945fb698ba6a]
 owner 0x5B0c43004e0a68Eb197c629CE78Da62d65Aa6C03 balance 9999900 tokens
 receiver 0x5B0c43004e0a68Eb197c629CE78Da62d65Aa6C03 balance 100 tokens
 ```
+
+# 7. 解析区块数据
+
+指定URL和合约地址（查询最后一个区块高度的交易数据并解析方法名称、参数名称和参数值）, 也可以通过添加--height选项指定固定高度去解析
+
+```shell
+$ go build -ldflags "-s -w" -o bcos-explorer cmd/bcos-explorer/main.go
+$ ./bcos-explorer --node-url http://192.168.20.108:8545 --contract-addr 0xd3D82d2515DF022b60F7Fad5daeD06AB046b42df
+
+method name [transferFrom]
+input type [address] name [from]
+input type [address] name [to]
+input type [uint64] name [amount]
+input name [amount] value [100]
+input name [from] value [0x5B0c43004e0a68Eb197c629CE78Da62d65Aa6C03]
+input name [to] value [0x90Cfd4D61C9D4C63f2e4648229775ABa19ced8dF]
+```
+

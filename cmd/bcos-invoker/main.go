@@ -5,6 +5,7 @@ import (
 	"github.com/FISCO-BCOS/go-sdk/core/types"
 	"github.com/civet148/bcos-explorer/config"
 	"github.com/civet148/bcos-explorer/contract/token"
+	"github.com/civet148/bcos-explorer/flags"
 	"github.com/civet148/bcos-explorer/pkg/bcos"
 	"github.com/civet148/bcos-explorer/pkg/utils"
 	"github.com/civet148/log"
@@ -23,14 +24,6 @@ const (
 	CmdNameDeploy   = "deploy"   //部署合约
 	CmdNameBalance  = "balance"  //查询余额
 	CmdNameTransfer = "transfer" //转账操作
-)
-
-const (
-	CmdFlagNameNodeUrl      = "node-url"      //节点URL参数名
-	CmdFlagNameChainID      = "chain-id"      //链ID(默认1)
-	CmdFlagNameGroupID      = "group-id"      //分组ID(默认1)
-	CmdFlagNameContractAddr = "contract-addr" //合约地址
-	CmdFlagNameAccountAddr  = "account-addr"  //账户地址
 )
 
 const (
@@ -68,17 +61,17 @@ var deployCmd = &cli.Command{
 	ArgsUsage: "",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:     CmdFlagNameNodeUrl,
+			Name:     flags.CmdFlagNameNodeUrl,
 			Usage:    "BCOS node url, eg. http://127.0.0.1:8545",
 			Required: true, //必填：节点URL
 		},
 		&cli.Int64Flag{
-			Name:  CmdFlagNameChainID,
+			Name:  flags.CmdFlagNameChainID,
 			Usage: "chain id",
 			Value: 1, //非必填：chain id默认=1
 		},
 		&cli.IntFlag{
-			Name:  CmdFlagNameGroupID,
+			Name:  flags.CmdFlagNameGroupID,
 			Usage: "group id",
 			Value: 1, //非必填：group id默认=1
 		},
@@ -86,9 +79,9 @@ var deployCmd = &cli.Command{
 	Action: func(cctx *cli.Context) error {
 
 		cfg := &config.Config{
-			NodeUrl: cctx.String(CmdFlagNameNodeUrl), //从命令行参数获取节点URL
-			ChainID: cctx.Int64(CmdFlagNameChainID),  //从命令行参数获取分组ID（不传则默认=1）
-			GroupID: cctx.Int(CmdFlagNameGroupID),    //从命令行参数获取分组ID（不传则默认=1)
+			NodeUrl: cctx.String(flags.CmdFlagNameNodeUrl), //从命令行参数获取节点URL
+			ChainID: cctx.Int64(flags.CmdFlagNameChainID),  //从命令行参数获取分组ID（不传则默认=1）
+			GroupID: cctx.Int(flags.CmdFlagNameGroupID),    //从命令行参数获取分组ID（不传则默认=1)
 			PrivateKey: ownerPrivateKey, //私钥
 		}
 
@@ -131,22 +124,22 @@ var transferCmd = &cli.Command{
 	ArgsUsage: "",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:     CmdFlagNameNodeUrl,
+			Name:     flags.CmdFlagNameNodeUrl,
 			Usage:    "BCOS node url, eg. http://127.0.0.1:8545",
 			Required: true, //必填：节点URL
 		},
 		&cli.StringFlag{
-			Name:     CmdFlagNameContractAddr,
+			Name:     flags.CmdFlagNameContractAddr,
 			Usage:    "BCOS contract address",
 			Required: true, //必填：合约地址
 		},
 		&cli.Int64Flag{
-			Name:  CmdFlagNameChainID,
+			Name:  flags.CmdFlagNameChainID,
 			Usage: "chain id",
 			Value: 1, //非必填：chain id默认=1
 		},
 		&cli.IntFlag{
-			Name:  CmdFlagNameGroupID,
+			Name:  flags.CmdFlagNameGroupID,
 			Usage: "group id",
 			Value: 1, //非必填：group id默认=1
 		},
@@ -154,9 +147,9 @@ var transferCmd = &cli.Command{
 	Action: func(cctx *cli.Context) error {
 
 		cfg := &config.Config{
-			NodeUrl: cctx.String(CmdFlagNameNodeUrl), //从命令行参数获取节点URL
-			ChainID: cctx.Int64(CmdFlagNameChainID),  //从命令行参数获取分组ID（不传则默认=1）
-			GroupID: cctx.Int(CmdFlagNameGroupID),    //从命令行参数获取分组ID（不传则默认=1)
+			NodeUrl: cctx.String(flags.CmdFlagNameNodeUrl), //从命令行参数获取节点URL
+			ChainID: cctx.Int64(flags.CmdFlagNameChainID),  //从命令行参数获取分组ID（不传则默认=1）
+			GroupID: cctx.Int(flags.CmdFlagNameGroupID),    //从命令行参数获取分组ID（不传则默认=1)
 			PrivateKey: ownerPrivateKey, //私钥
 		}
 
@@ -166,7 +159,7 @@ var transferCmd = &cli.Command{
 			return err
 		}
 		defer client.Close()
-		strContractAddr := cctx.String(CmdFlagNameContractAddr)
+		strContractAddr := cctx.String(flags.CmdFlagNameContractAddr)
 		ca, _ := utils.EtherAddr(strContractAddr) //合约地址
 
 		var invoker *token.Token

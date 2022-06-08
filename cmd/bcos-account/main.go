@@ -11,7 +11,7 @@ import (
 const (
 	Version     = "v1.0.0"
 	ProgramName = "bcos-account"
-	FullName    = "BCOS account generator"
+	FullName    = "account key generator"
 )
 
 const (
