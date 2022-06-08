@@ -89,9 +89,10 @@ var deployCmd = &cli.Command{
 			NodeUrl: cctx.String(CmdFlagNameNodeUrl), //从命令行参数获取节点URL
 			ChainID: cctx.Int64(CmdFlagNameChainID),  //从命令行参数获取分组ID（不传则默认=1）
 			GroupID: cctx.Int(CmdFlagNameGroupID),    //从命令行参数获取分组ID（不传则默认=1)
+			PrivateKey: ownerPrivateKey, //私钥
 		}
 
-		client, err := bcos.NewBcosClient(cfg, ownerPrivateKey)
+		client, err := bcos.NewBcosClient(cfg)
 		if err != nil {
 			log.Fatal(err)
 			return err
@@ -156,9 +157,10 @@ var transferCmd = &cli.Command{
 			NodeUrl: cctx.String(CmdFlagNameNodeUrl), //从命令行参数获取节点URL
 			ChainID: cctx.Int64(CmdFlagNameChainID),  //从命令行参数获取分组ID（不传则默认=1）
 			GroupID: cctx.Int(CmdFlagNameGroupID),    //从命令行参数获取分组ID（不传则默认=1)
+			PrivateKey: ownerPrivateKey, //私钥
 		}
 
-		client, err := bcos.NewBcosClient(cfg, ownerPrivateKey)
+		client, err := bcos.NewBcosClient(cfg)
 		if err != nil {
 			log.Fatal(err)
 			return err

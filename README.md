@@ -67,8 +67,9 @@ drwxrwxrwx 1 lory lory  4096 Jun  2 13:39 ../
 
 ```
 
-# 4. 创建账户私钥
+# 4. 管理账户私钥
 
+## 4.1 创建账户密钥
 ```shell
 # 进入cmd/bcos-account目录编译bcos-account程序
 $ cd cmd/bcos-account && go build -ldflags "-s -w" -o bcos-account
@@ -81,8 +82,23 @@ phrase [road always practice armed know stem crucial wave crouch enact candy ear
 
 ```
 
+## 4.2 助记词恢复密钥
+
+```shell
+# 进入cmd/bcos-account目录编译bcos-account程序
+$ cd cmd/bcos-account && go build -ldflags "-s -w" -o bcos-account
+$ ./bcos-account recover "road always practice armed know stem crucial wave crouch enact candy earn"
+
+address [0x5f9c56B86E94e9302D7074b8E5f1397a798452E5]
+public key [032ca918b9e91ab3476d656ba66aea74a1318f5417f74e63de86ffa0d70e30cd24]
+private key [44af095ec12d675dc338898a15c8cfd8e6d7ea8de608942a590a1b9fe27334dc]
+phrase [road always practice armed know stem crucial wave crouch enact candy earn]
+
+```
 
 # 5. 部署合约
+
+- 部署合约需要用到私钥(参考第4.1章节自行创建账户密钥)
 
 ```shell
 # 进入cmd/bcos-invoker目录编译bcos-invoker程序
