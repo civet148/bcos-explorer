@@ -11,7 +11,9 @@ import (
 	"github.com/civet148/bcos-explorer/pkg/bcos"
 	"github.com/civet148/bcos-explorer/types"
 	"github.com/civet148/log"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/urfave/cli/v2"
+	btypes "github.com/FISCO-BCOS/go-sdk/core/types"
 )
 
 const(
@@ -47,7 +49,7 @@ func (m *Explorer) Run(cctx *cli.Context) error {
 		}
 	}
 
-	log.Infof("latest block height [%d]", height)
+	log.Infof("block height [%d] handling...", height)
 
 	//解析最新高度的区块数据
 	var block []byte
@@ -67,9 +69,24 @@ func (m *Explorer) Run(cctx *cli.Context) error {
 	for _, tx := range header.Transactions {
 		//当to地址是0x0000000000000000000000000000000000000000时表示当次交易为部署合约(一般不需要过多解析)
 		if tx.To != ZERO_ADDR {
+			var hash common.Hash
+			hash = common.HexToHash(tx.Hash)
+
 			//解析合约方法transferFrom调用参数名和值
 			if err = m.parseTxMethod(header, tx); err != nil {
 				return log.Errorf(err.Error())
+			}
+
+			//查询交易回执
+			receipt, err := client.GetTransactionReceipt(ctx, hash)
+			if err != nil {
+				return log.Errorf("get transaction receipt error [%s]", err)
+			}
+			fmt.Printf("\n----------------------------------------------------\n")
+			if receipt.Status != btypes.Success {//交易不成功
+				fmt.Printf("tx receipt status error message [%s]\n", receipt.GetErrorMessage())
+			} else {//交易成功
+				fmt.Printf("tx receipt status OK\n")
 			}
 		} else {
 			fmt.Printf("height [%v] tx hash [%s] is a deploy transaction\n", height, tx.Hash) //合约部署交易
