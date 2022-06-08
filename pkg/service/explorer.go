@@ -71,6 +71,8 @@ func (m *Explorer) Run(cctx *cli.Context) error {
 			if err = m.parseTxMethod(header, tx); err != nil {
 				return log.Errorf(err.Error())
 			}
+		} else {
+			fmt.Printf("height [%v] tx hash [%s] is a deploy transaction\n", height, tx.Hash) //合约部署交易
 		}
 	}
 	return nil
