@@ -198,7 +198,7 @@ var transferCmd = &cli.Command{
 			return err
 		}
 		//部署合约的账户就是官方账户，当前余额一千万(跟token发行量保持一致)
-		fmt.Printf("receiver %s balance %d tokens\n", owner.String(), balance)
+		fmt.Printf("receiver %s balance %d tokens\n", receiver.String(), balance)
 		return nil
 	},
 }

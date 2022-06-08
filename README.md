@@ -121,7 +121,7 @@ $ ./bcos-invoker transfer --node-url "http://192.168.20.108:8545" --contract-add
 
 tx hash [0x59f88e2f8a14e51b6461f936ae06484403b9e1589b92ac7bce17945fb698ba6a]
 owner 0x5B0c43004e0a68Eb197c629CE78Da62d65Aa6C03 balance 9999900 tokens
-receiver 0x5B0c43004e0a68Eb197c629CE78Da62d65Aa6C03 balance 100 tokens
+receiver 0x90Cfd4D61C9D4C63f2e4648229775ABa19ced8dF balance 100 tokens
 ```
 
 # 7. 解析区块数据
