@@ -318,6 +318,13 @@ lory@host:~/webase/webase-deploy$ python3 deploy.py stopAll && python3 deploy.py
 
 ![img_3.png](img_3.png)
 
+# 查看区块消息
+- 合约正确部署到BCOS区块链上之后，通过WeBASE平台导入Token.abi文件可以通过区块浏览器查看合约方法的名称、参数以及值等上链消息明细
+
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)
+
+
 # docker部署指南
 
 [一键Docker部署 — WeBASE v1.5.4 文档 (webasedoc.readthedocs.io)](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Install/docker_install.html)
