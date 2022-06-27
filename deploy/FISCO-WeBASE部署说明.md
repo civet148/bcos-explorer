@@ -26,9 +26,12 @@ lory@host:~$ sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 # 安装指南
 
-## 1. 安装JDK11
+## 1. 安装JDK11和Nginx
 
 ```sh
+# 安装Nginx
+lory@host:~$ sudo apt install -y nginx
+
 # 安装JDK11
 lory@host:~$ sudo apt install -y openjdk-11-jre-headless 
 
